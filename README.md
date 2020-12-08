@@ -19,7 +19,7 @@
 
 | Column             | Type      | Options                       |
 |--------------------|-----------|-------------------------------|
-| product_name       | text      | null: false                   |
+| product_name       | string    | null: false                   |
 |product_description | text      | null: false                   |
 | category_id        | integer   | null: false                   |
 | status_id          | integer   | null: false                   |
