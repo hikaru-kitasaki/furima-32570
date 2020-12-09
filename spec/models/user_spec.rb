@@ -8,11 +8,7 @@ describe User do
     context '新規登録がうまくいくとき' do
       it 'nickname、email、password、password_confirmation、last_name、first_name、 last_name_kana、first_name-kanaとbirthdayが存在すれば登録できる' do
         expect(@user).to be_valid
-      end
-      it 'passwordが６文字以上であれば登録できる' do
-        @user.password = '0000aaaa'
-        expect(@user).to be_valid
-      end
+      end 
     end
 
     context '新規登録がうまくいかないとき' do
@@ -88,8 +84,9 @@ describe User do
       end
       it 'ユーザー本名のフリガナに全角（カタカナ）以外が使用されていると登録できない' do
         @user.last_name_kana = 'やまだ'
+        @user.first_name_kana = 'たろう'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Last name kana is invalid')
+        expect(@user.errors.full_messages).to include("Last name kana is invalid", "First name kana is invalid")
       end
       it 'birthdayが空だと登録できない' do
         @user.birthday = ''
