@@ -68,6 +68,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Selling price must be less than or equal to 9999999")
       end
+      it 'selling_priceが半角数字でないと登録できない' do
+        @item.selling_price = '１０００'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Selling price is not a number")
+      end
       it 'userが紐付いていないと登録できない' do
         @item.user = nil
         @item.valid?
