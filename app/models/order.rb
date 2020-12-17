@@ -9,6 +9,8 @@ class Order
     validates :phone_number, length: { maximum: 11 }, format: { with: /\A[0-9]+\z/ }
     validates :prefectures_id, numericality: { other_than: 0 }
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   validates :phone_number, numericality: { only_integer: true }

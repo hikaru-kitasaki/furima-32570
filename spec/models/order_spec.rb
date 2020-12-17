@@ -54,10 +54,25 @@ RSpec.describe Order, type: :model do
         @order.valid?
         expect(@order.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
+      it 'phone_numberが英数混合では購入できないこと' do
+        @order.phone_number = '0901234567a'
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Phone number is invalid", "Phone number is not a number")
+      end
       it 'tokenが空だと購入できない' do
         @order.token = nil
         @order.valid?
         expect(@order.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが無いと購入できない' do
+        @order.user_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが無いと購入できない' do
+        @order.item_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
