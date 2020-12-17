@@ -4,7 +4,7 @@ RSpec.describe Order, type: :model do
   before do
     user = FactoryBot.create(:user)
     item = FactoryBot.create(:item)
-    @order = FactoryBot.build(:order,user_id: user.id, item_id: item.id)
+    @order = FactoryBot.build(:order, user_id: user.id, item_id: item.id)
     sleep(1)
   end
 
@@ -25,14 +25,14 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include("Postal code can't be blank")
       end
       it 'postal_caodeにハイフンがないと購入できない' do
-        @order.postal_code = "1234567"
+        @order.postal_code = '1234567'
         @order.valid?
-        expect(@order.errors.full_messages).to include("Postal code is invalid")
+        expect(@order.errors.full_messages).to include('Postal code is invalid')
       end
       it 'prefectures_idが0だと購入できない' do
         @order.prefectures_id = 0
         @order.valid?
-        expect(@order.errors.full_messages).to include("Prefectures must be other than 0")
+        expect(@order.errors.full_messages).to include('Prefectures must be other than 0')
       end
       it 'municipallyが空だと購入できない' do
         @order.municipally = nil
@@ -50,9 +50,9 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include("Phone number can't be blank")
       end
       it 'phone_numberが12桁以上だと購入できない' do
-        @order.phone_number = "090123456789"
+        @order.phone_number = '090123456789'
         @order.valid?
-        expect(@order.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+        expect(@order.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
       it 'tokenが空だと購入できない' do
         @order.token = nil

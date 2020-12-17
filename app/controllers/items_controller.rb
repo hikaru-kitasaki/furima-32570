@@ -50,7 +50,8 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:image, :product_name, :product_description, :selling_price, :category_id, :status_id, :shipping_charges_id, :shipping_area_id, :days_to_ship_id).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :product_name, :product_description, :selling_price, :category_id, :status_id,
+                                 :shipping_charges_id, :shipping_area_id, :days_to_ship_id).merge(user_id: current_user.id)
   end
 
   def set_item
