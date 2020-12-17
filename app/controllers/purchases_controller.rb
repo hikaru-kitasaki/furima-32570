@@ -2,14 +2,12 @@ class PurchasesController < ApplicationController
   before_action :authenticate_user!
   def index
     @item = Item.find(params[:item_id])
-    if Purchase.exists?
+    if @item.purchase.present?
+      redirect_to root_path
+    elsif current_user.id == @item.user_id
       redirect_to root_path
     else
-      if current_user.id == @item.user_id
-        redirect_to root_path
-      else
-        @order = Order.new
-      end
+      @order = Order.new
     end
   end
 
